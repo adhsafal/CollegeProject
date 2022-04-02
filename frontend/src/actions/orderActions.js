@@ -60,6 +60,8 @@ export const createOrder = (order) => async (dispatch, getState) => {
     });
 
     localStorage.removeItem("cartItems");
+    localStorage.removeItem("Orders");
+
   } catch (error) {
     dispatch({
       type: ORDER_CREATE_FAIL,

@@ -57,6 +57,7 @@ function OrderListScreen({ history }) {
               <th>PAID</th>
               <th>DELIVERED</th>
               <th></th>
+
             </tr>
           </thead>
 
@@ -83,7 +84,6 @@ function OrderListScreen({ history }) {
                     <i className="fas fa-times" style={{ color: "red" }}></i>
                   )}
                 </td>
-
                 <td>
                   <LinkContainer to={`/order/${order._id}`}>
                     <Button variant="dark" className="btn-sm">
@@ -91,6 +91,7 @@ function OrderListScreen({ history }) {
                     </Button>
                   </LinkContainer>
                 </td>
+
               </tr>
             ))}
           </tbody>

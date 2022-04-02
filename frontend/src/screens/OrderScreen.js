@@ -193,6 +193,17 @@ function OrderScreen({ history, match }) {
                           {item.qty} X ₹{item.price} = ₹
                           {(item.qty * item.price).toFixed(2)}
                         </Col>
+                        <Col md={4}>
+                          {item.size}
+                          {item.colorDetail.map((item, index) =>
+                            <p key={index}>{Object.entries(item).map(([key, value]) => (
+                              <div>
+                                <p>{key}</p>
+                                <p>{value}</p>
+                              </div>
+                            ))}</p>
+                          )}
+                        </Col>
                       </Row>
                     </ListGroup.Item>
                   ))}

@@ -29,10 +29,26 @@ function PlaceOrderScreen({ history }) {
 
   const cart = useSelector((state) => state.cart);
 
+
+
+
   // PRICE CALCULATIONS, WE ARE SETTING AN ATTRIBUTE TO OUR CART OBJECT BUT IT WON'T UPDATE OUR STATE, IT'S JUST FOR THIS PAGE
-  cart.itemsPrice = cart.cartItems
+
+  const orders = JSON.parse(localStorage.getItem('Orders'));
+
+
+  const datas = [...cart.cartItems, ...orders]
+
+
+  cart.itemsPrice = datas
     .reduce((acc, item) => acc + item.price * item.qty, 0)
     .toFixed(2);
+
+
+  // cart.itemsPrice = parseFloat(orders.reduce((acc, item) => acc + item.Price * item.Quantity, 0)
+  //   .toFixed(2)) + parseFloat(cart.itemsPrice);
+
+  console.log(cart.itemsPrice)
 
   cart.shippingPrice = (cart.itemsPrice > 100 ? 0 : 10).toFixed(2);
 
@@ -66,7 +82,7 @@ function PlaceOrderScreen({ history }) {
   const placeorder = () => {
     dispatch(
       createOrder({
-        orderItems: cart.cartItems,
+        orderItems: datas,
         shippingAddress: cart.shippingAddress,
         paymentMethod: cart.paymentMethod,
         itemsPrice: cart.itemsPrice,
@@ -107,37 +123,34 @@ function PlaceOrderScreen({ history }) {
             <ListGroup.Item>
               <h2>Order Items</h2>
 
-              {cart.cartItems.length === 0 ? (
-                <Message variant="info">Your cart is empty</Message>
-              ) : (
-                <ListGroup variant="flush">
-                  {cart.cartItems.map((item, index) => (
-                    <ListGroup.Item key={index}>
-                      <Row>
-                        <Col md={1}>
-                          <Image
-                            src={item.image}
-                            alt={item.name}
-                            fluid
-                            rounded
-                          />
-                        </Col>
 
-                        <Col>
-                          <Link to={`/product${item.product}`}>
-                            {item.name}
-                          </Link>
-                        </Col>
+              <ListGroup variant="flush">
+                {datas.map((item, index) => (
+                  <ListGroup.Item key={index}>
+                    <Row>
+                      <Col md={1}>
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          fluid
+                          rounded
+                        />
+                      </Col>
 
-                        <Col md={4}>
-                          {item.qty} X ₹{item.price} = ₹
-                          {(item.qty * item.price).toFixed(2)}
-                        </Col>
-                      </Row>
-                    </ListGroup.Item>
-                  ))}
-                </ListGroup>
-              )}
+                      <Col>
+                        {item.name}
+                      </Col>
+
+                      <Col md={4}>
+                        {item.qty} X ₹{item.price} = ₹
+                        {(item.qty * item.price).toFixed(2)}
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
+                ))}
+              </ListGroup>
+
+
             </ListGroup.Item>
           </ListGroup>
         </Col>
@@ -189,7 +202,7 @@ function PlaceOrderScreen({ history }) {
                 <Button
                   type="button"
                   className="w-100"
-                  disabled={cart.cartItems === 0}
+                  disabled={datas === 0}
                   onClick={placeorder}
                 >
                   Place Order

@@ -62,6 +62,8 @@ def addOrderItems(request):
                 qty=i['qty'],
                 price=i['price'],
                 image=product.image.url,
+                size=i.get('size'),
+                colorDetail=i.get('colors')
             )
 
             # (4) Update Stock

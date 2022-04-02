@@ -32,18 +32,18 @@ function Header() {
 
   return (
     <header>
-      <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
+      <Navbar style={{ padding: '0' }} bg="dark" variant="dark" expand="lg" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
             <Navbar.Brand>
-              <img src={logo} alt="Style Hub" style={{height: "100px"}}/>
+              <img src={logo} alt="Style Hub" style={{ height: "100px" }} />
             </Navbar.Brand>
           </LinkContainer>
 
           <Navbar.Toggle aria-controls="navbarScroll" />
 
           <Navbar.Collapse id="navbarScroll">
-            <SearchBox /> 
+            <SearchBox />
 
             <Nav
               className="ms-auto my-2 my-lg-0"

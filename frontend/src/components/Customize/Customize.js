@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { useLocation } from "react-router-dom";
 // import Navbar from '../Navbar/Navbar'
-// import './Customize.css'
+import './Customize.css'
 import styled from 'styled-components';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
@@ -13,16 +13,73 @@ import Tshirt from '../Three/Tshirt'
 import Tshirt2 from '../Three/Tshirt2';
 import Hoodie from '../Three/Hoodie';
 import Picker from '../Three/Picker';
+import { HexColorPicker } from 'react-colorful';
+import { proxy, useSnapshot } from 'valtio';
+import { useSelector } from 'react-redux';
 
 
+
+const halfshirt = proxy({
+    current: null,
+    items: {
+        Shirt: "#6076e0",
+        Collar: "#dcd96c",
+        Sleeve: "#8dda60",
+    },
+})
+
+const fullshirt = proxy({
+    current: null,
+    items: {
+        body: "#fd4a5c",
+        lowerSleeve: "#0008d6",
+        upperSleeve: "#e6de85",
+        belt: "#d1dc7d",
+        collar: "#a0e287",
+        bottomBase: "#72aee1",
+        bottoms: "#231642",
+    },
+})
+
+let state = proxy({
+    current: null,
+    items: {
+        front: "#86df6d",
+        back: "#569bd2",
+        hood: "#ef4047",
+    },
+})
+
+const hoodieColors = proxy({
+    current: null,
+    items: {
+        front: "#86df6d",
+        back: "#569bd2",
+        hood: "#ef4047",
+    },
+})
 
 const Customize = () => {
 
 
+    const productDetails = useSelector((state) => state.productDetails);
+    const { product, loading, error } = productDetails;
+    console.log(product)
+
+    const snap = useSnapshot(state)
+    const [col, setCol] = useState([])
+
+    const handleColorPicker = (color) => {
+        state.items[snap.current] = color;
+        console.log([snap.current], color)
+        setCol(prev => ({ ...prev, [snap.current]: color }))
+        console.log(snap)
+    }
+    console.log('name', col)
+
     const search = useLocation().search;
     const name = new URLSearchParams(search).get('brand');
 
-    const tname = 'Half Sleeve'
 
 
     const [quantity, setQuantity] = useState(1);
@@ -47,41 +104,70 @@ const Customize = () => {
 
     //to set on localStorage
 
-    const getLocalItems = () => {
-        let order = localStorage.getItem('Orders')
+    // const getLocalItems = () => {
+    //     let order = localStorage.getItem('Orders')
 
 
-        if (order) {
-            return JSON.parse(localStorage.getItem('Orders'));
-        }
-        else {
-            return [];
-        }
-    }
+    //     if (order) {
+    //         return JSON.parse(localStorage.getItem('Orders'));
+    //     }
+    //     else {
+    //         return [];
+    //     }
+    // }
 
-    const [items, setItems] = useState(getLocalItems())
+    const [background, setBackground] = useState('#fff')
+
+    const handleChangeComplete = (color, event) => {
+        console.log(event)
+        console.log(color)
+        setBackground(color);
+
+    };
+
+
+    const items = [{
+        'product': product._id,
+        "name": product.name,
+        'image': product.image,
+        'size': size,
+        'qty': quantity,
+        'colors': [col],
+        'price': product.price
+    }]
+    const previousItems = JSON.parse(localStorage.getItem('Orders')) ?? [];
+    const c = [...items, ...previousItems]
 
     const addItems = () => {
-        setItems([...items, [tname, size, quantity]])
+        console.log(product.name, size, quantity, col)
+
+        localStorage.setItem('Orders', JSON.stringify(c))
+
     }
 
     //Adding data to local storage
 
-    useEffect(() => {
-        localStorage.setItem('Orders', JSON.stringify(items))
-    }, [items]);
+    // useEffect(() => {
+    //     localStorage.setItem('Orders', JSON.stringify(items))
+    // }, [items]);
 
 
     const renderSwitch = (name) => {
+
         switch (name) {
             case 'T-Shirt':
-                return <Tshirt />;
+                state = halfshirt
+                return <Tshirt state={halfshirt} />;
             case 'Sleeve':
-                return <Tshirt2 />;
+                state = fullshirt
+                return <Tshirt2 state={fullshirt} />;
             default:
-                return <Hoodie />;
+                state = hoodieColors
+                return <Hoodie state={hoodieColors} />;
         }
     }
+
+
 
 
     return (
@@ -90,11 +176,11 @@ const Customize = () => {
             <section className='container' >
                 <div className="d-flex row " >
                     <div className="sections__left col-md-3"  >
-                        <h4 style={{ fontWeight: 'bold' }}>
+                        <h4 style={{ fontWeight: 'bold', marginTop: '30px' }}>
                             Customize it Yourself
                         </h4>
                         <h1 style={{ fontWeight: 'bold' }}>
-                            T-Shirt
+                            {product.name}
                         </h1>
                         <p style={{ fontWeight: 'bold' }}>Please select the appropriate size and color you want in your T-shirt</p>
 
@@ -120,10 +206,22 @@ const Customize = () => {
                             </ButtonGroup>
                             <h5 style={{ color: 'red' }}>{size}</h5>
                         </div>
-
+                        <>
+                            <div style={{
+                                display: snap.current ? "block" : "block",
+                                position: 'absolute',
+                                top: '230px',
+                                right: '185px'
+                            }}>
+                                <HexColorPicker className="picker" color={snap.items[snap.current]} onChange={(color) => handleColorPicker(color)} />
+                                <h5 style={{
+                                    color: '#000',
+                                    textTransform: 'capitalize'
+                                }}>{snap.current} {(state.items[snap.current])} </h5>
+                            </div>
+                        </>
                         <div className="customize__quantity">
                             <h3 style={{ fontWeight: 'bold' }}>Quantity</h3>
-
                             <div className="sizeButton">
                                 <ButtonGroup variant="text" aria-label="text button group">
                                     <Button onClick={decreaseQuantity} style={{ fontWeight: 'bold', color: 'black' }}>-</Button>
@@ -131,7 +229,7 @@ const Customize = () => {
                                 </ButtonGroup>
                                 <p style={{ fontWeight: 'bold', fontSize: '20px' }}>{quantity}</p>
                             </div>
-                            <button className='btn btn-outline-primary addButton' /*onClick={cartText}*/ onClick={addItems} style={{ fontWeight: 'bold', color: 'black' }}> {text} </button>
+                            <button className='btn btn-outline-primary addButton' onClick={addItems} style={{ fontWeight: 'bold', color: 'black' }}> {text} </button>
                         </div>
                     </div>
                 </div>

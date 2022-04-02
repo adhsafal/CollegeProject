@@ -30,7 +30,7 @@ function CartScreen({ match, location, history }) {
   const qty = location.search ? Number(location.search.split("=")[1]) : 1;
   //qty: '?qty=3' -> ['?qty',3] -> 3
 
-  /* FIRING OFF DISPATCH, BUT ONLY IF WE HAVE A PRODUCT ID & QUANTITY */
+  /* FIRING OFF DISPATCH, BUT ONLY IF WE HAVE A PRODUCT ID & qty */
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -43,6 +43,13 @@ function CartScreen({ match, location, history }) {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
+  const orders = JSON.parse(localStorage.getItem('Orders'));
+  console.log(orders)
+
+  useEffect(() => {
+  }, []);
+
+
   /* HANDLERS */
 
   const removeFromCartHandler = (id) => {
@@ -53,15 +60,14 @@ function CartScreen({ match, location, history }) {
     history.push("/login?redirect=shipping");
   };
 
+
+
   return (
     <Row>
       <Col md={8}>
         <h1>Shopping Cart</h1>
-        {cartItems.length === 0 ? (
-          <Message variant="info">
-            Your cart is empty. <Link to="/">Go Back</Link>
-          </Message>
-        ) : (
+
+        <div>
           <ListGroup variant="flush">
             {cartItems.map((item) => (
               <ListGroup.Item key={item.product}>
@@ -69,13 +75,10 @@ function CartScreen({ match, location, history }) {
                   <Col md={2}>
                     <Image src={item.image} alt={item.name} fluid rounded />
                   </Col>
-
                   <Col m={3}>
                     <Link to={`/product/${item.product}`}>{item.name}</Link>
                   </Col>
-
                   <Col>₹{item.price}</Col>
-
                   <Col md={3}>
                     <Form.Control
                       as="select"
@@ -93,7 +96,6 @@ function CartScreen({ match, location, history }) {
                       ))}
                     </Form.Control>
                   </Col>
-
                   <Col md={1}>
                     <Button
                       type="button"
@@ -107,8 +109,59 @@ function CartScreen({ match, location, history }) {
               </ListGroup.Item>
             ))}
           </ListGroup>
-        )}
+          <ListGroup variant="flush">
+            {orders.map((item) => (
+              <ListGroup.Item key={item.name}>
+                <Row>
+                  <Col md={2}>
+                    <Image src={item.image} alt={item.name} fluid rounded />
+                  </Col>
+                  <Col m={3}>
+                    <Link to={`/product/${item.product}`}>{item.name}</Link>
+                  </Col>
+                  <Col>₹{item.price}</Col>
+                  <Col md={3}>
+                    <Form.Control
+                      as="select"
+                      value={item.qty}
+                      onChange={(e) =>
+                        dispatch(
+                          addToCart(item.product, Number(e.target.value))
+                        )
+                      }
+                    >
+                      {[...Array(item.countInStock).keys()].map((x) => (
+                        <option key={x + 1} value={x + 1}>
+                          {x + 1}
+                        </option>
+                      ))}
+                    </Form.Control>
+                  </Col>
+                  {item.size}
+                  {item.colors.map((item, index) =>
+                    <p key={index}>{Object.entries(item).map(([key, value]) => (
+                      <div>
+                        <p>{key}</p>
+                        <p>{value}</p>
+                      </div>
+                    ))}</p>
+                  )}
+                  <Col md={1}>
+                    <Button
+                      type="button"
+                      variant="light"
+                      onClick={() => removeFromCartHandler(item.product)}
+                    >
+                      <i className="fas fa-trash"></i>
+                    </Button>
+                  </Col>
+                </Row>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        </div>
       </Col>
+
 
       <Col md={4}>
         <Card>
@@ -129,7 +182,6 @@ function CartScreen({ match, location, history }) {
             <Button
               type="button"
               className="w-100"
-              disabled={cartItems.length === 0}
               onClick={checkoutHandler}
             >
               Proceed To Checkout

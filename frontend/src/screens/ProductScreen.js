@@ -115,7 +115,7 @@ function ProductScreen({ match, history }) {
                   Description: {product.description}
                 </ListGroup.Item>
               </ListGroup>
-              <LinkContainer to={`/customize/?brand=${product.brand}`}>
+              <LinkContainer to={`/customize/${product._id}?brand=${product.brand}`}>
                 <Button
                   className="w-100 btn"
                   type="button"
