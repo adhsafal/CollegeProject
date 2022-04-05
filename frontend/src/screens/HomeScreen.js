@@ -44,14 +44,14 @@ function HomeScreen({ history }) {
 
       <Features />
 
-      <h1>Latest Products</h1>
+      <h1 className='text-center' style={{ margin: '0', paddingTop: '50px' }}>Latest Products</h1>
 
       {loading ? (
         <Loader />
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
-        <div>
+        <div style={{ padding: '0 100px' }}>
           <Row>
             {products.map((product) => {
               return (

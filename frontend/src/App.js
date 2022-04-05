@@ -1,5 +1,5 @@
 /* REACT BOOTSTRAP */
-import { Container } from "react-bootstrap";
+// import { Container-fluid } from "react-bootstrap";
 
 /* COMPONENTS */
 import Header from "./components/Header";
@@ -29,7 +29,7 @@ function App() {
   return (
     <Router>
       <Header />
-      <Container>
+      <div className="container-fluid px-0">
         <main className="py-3">
           <Route exact path="/" component={HomeScreen} />
 
@@ -63,7 +63,7 @@ function App() {
 
           <Route path="/customize" component={Customize} />
         </main>
-      </Container>
+      </div>
       <Footer />
     </Router>
   );
