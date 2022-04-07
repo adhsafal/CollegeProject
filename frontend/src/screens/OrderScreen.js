@@ -190,7 +190,7 @@
 //                         </Col>
 
 //                         <Col md={4}>
-//                           {item.qty} X ₹{item.price} = ₹
+//                           {item.qty} X रु{item.price} = रु
 //                           {(item.qty * item.price).toFixed(2)}
 //                         </Col>
 //                         <Col md={4}>
@@ -224,7 +224,7 @@
 //                 <Row>
 //                   <Col>Items:</Col>
 
-//                   <Col>₹{order.itemsPrice}</Col>
+//                   <Col>रु{order.itemsPrice}</Col>
 //                 </Row>
 //               </ListGroup.Item>
 
@@ -232,7 +232,7 @@
 //                 <Row>
 //                   <Col>Shipping:</Col>
 
-//                   <Col>₹{order.shippingPrice}</Col>
+//                   <Col>रु{order.shippingPrice}</Col>
 //                 </Row>
 //               </ListGroup.Item>
 
@@ -240,7 +240,7 @@
 //                 <Row>
 //                   <Col>Tax:</Col>
 
-//                   <Col>₹{order.taxPrice}</Col>
+//                   <Col>रु{order.taxPrice}</Col>
 //                 </Row>
 //               </ListGroup.Item>
 
@@ -248,7 +248,7 @@
 //                 <Row>
 //                   <Col>Total:</Col>
 
-//                   <Col>₹{order.totalPrice}</Col>
+//                   <Col>रु{order.totalPrice}</Col>
 //                 </Row>
 //               </ListGroup.Item>
 
@@ -522,7 +522,7 @@ function OrderScreen({ history, match }) {
                         </Col>
 
                         <Col md={4}>
-                          {item.qty} X ₹{item.price} = ₹
+                          {item.qty} X रु{item.price} = रु
                           {(item.qty * item.price).toFixed(2)}
                         </Col>
                         <Col md={4}>
@@ -558,7 +558,7 @@ function OrderScreen({ history, match }) {
                 <Row>
                   <Col>Items:</Col>
 
-                  <Col>₹{order.itemsPrice}</Col>
+                  <Col>रु{order.itemsPrice}</Col>
                 </Row>
               </ListGroup.Item>
 
@@ -566,7 +566,7 @@ function OrderScreen({ history, match }) {
                 <Row>
                   <Col>Shipping:</Col>
 
-                  <Col>₹{order.shippingPrice}</Col>
+                  <Col>रु{order.shippingPrice}</Col>
                 </Row>
               </ListGroup.Item>
 
@@ -574,7 +574,7 @@ function OrderScreen({ history, match }) {
                 <Row>
                   <Col>Tax:</Col>
 
-                  <Col>₹{order.taxPrice}</Col>
+                  <Col>रु{order.taxPrice}</Col>
                 </Row>
               </ListGroup.Item>
 
@@ -582,7 +582,7 @@ function OrderScreen({ history, match }) {
                 <Row>
                   <Col>Total:</Col>
 
-                  <Col>₹{order.totalPrice}</Col>
+                  <Col>रु{order.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
 

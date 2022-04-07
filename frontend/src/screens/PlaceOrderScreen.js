@@ -142,7 +142,7 @@ function PlaceOrderScreen({ history }) {
                       </Col>
 
                       <Col md={4}>
-                        {item.qty} X ₹{item.price} = ₹
+                        {item.qty} X रु{item.price} = रु
                         {(item.qty * item.price).toFixed(2)}
                       </Col>
                     </Row>
@@ -166,7 +166,7 @@ function PlaceOrderScreen({ history }) {
                 <Row>
                   <Col>Items:</Col>
 
-                  <Col>₹{cart.itemsPrice}</Col>
+                  <Col>रु{cart.itemsPrice}</Col>
                 </Row>
               </ListGroup.Item>
 
@@ -174,7 +174,7 @@ function PlaceOrderScreen({ history }) {
                 <Row>
                   <Col>Shipping:</Col>
 
-                  <Col>₹{cart.shippingPrice}</Col>
+                  <Col>रु{cart.shippingPrice}</Col>
                 </Row>
               </ListGroup.Item>
 
@@ -182,7 +182,7 @@ function PlaceOrderScreen({ history }) {
                 <Row>
                   <Col>Tax:</Col>
 
-                  <Col>₹{cart.taxPrice}</Col>
+                  <Col>रु{cart.taxPrice}</Col>
                 </Row>
               </ListGroup.Item>
 
@@ -190,7 +190,7 @@ function PlaceOrderScreen({ history }) {
                 <Row>
                   <Col>Total:</Col>
 
-                  <Col>₹{cart.totalPrice}</Col>
+                  <Col>रु{cart.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
 

@@ -40,7 +40,7 @@ function ProductCarousel() {
 
             <Carousel.Caption className="carousel.caption">
               <h4>
-                {product.name} (Rs.{product.price})
+                {product.name} (रु.{product.price})
               </h4>
             </Carousel.Caption>
           </Link>
