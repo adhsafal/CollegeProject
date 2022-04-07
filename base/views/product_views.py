@@ -16,6 +16,7 @@ from rest_framework.serializers import Serializer
 from base.products import products
 from base.models import *
 from base.serializers import ProductSerializer
+from .algorithm import binary_search
 
 # Get all the products with query
 
@@ -26,7 +27,14 @@ def getProducts(request):
     if query == None:
         query = ''
 
+    
     products = Product.objects.filter(name__icontains=query).order_by('-_id')
+
+    
+    results = Product.objects.filter(name__icontains=query).order_by('-_id').values_list('name', flat=True)
+    results = binary_search(results, query)
+
+
 
     page = request.query_params.get('page')
     paginator = Paginator(products, 8)

@@ -69,7 +69,7 @@ function CartScreen({ match, location, history }) {
           <h1>Shopping Cart</h1>
           <div>
             <ListGroup variant="flush" >
-              {cartItems.map((item) => (
+              {cartItems?.map((item) => (
                 <ListGroup.Item key={item.product} >
                   <Row>
                     <Col md={2}>
@@ -110,7 +110,7 @@ function CartScreen({ match, location, history }) {
               ))}
             </ListGroup>
             <ListGroup variant="flush">
-              {orders.map((item) => (
+              {orders?.map((item) => (
                 <ListGroup.Item key={item.name} style={{ padding: '30px 10px' }}>
                   <Row>
                     <Col md={2}>
@@ -148,7 +148,7 @@ function CartScreen({ match, location, history }) {
                     </Col>
                     <div>
                       <h4>Colors</h4>
-                      {item.colors.map((item, index) =>
+                      {item.colors?.map((item, index) =>
                         <p style={{ display: 'flex', width: 'fit-content' }} key={index}>{Object.entries(item).map(([key, value]) => (
                           <div>
                             <table style={{ border: '1px solid black' }}>
