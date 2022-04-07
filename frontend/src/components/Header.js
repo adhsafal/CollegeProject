@@ -50,6 +50,7 @@ function Header() {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
+
               <LinkContainer to="/cart">
                 <Nav.Link>
                   <i className="fas fa-shopping-cart"></i> Cart

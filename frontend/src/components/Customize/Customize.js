@@ -3,16 +3,12 @@ import React, { useEffect, useState } from 'react'
 import { useLocation } from "react-router-dom";
 // import Navbar from '../Navbar/Navbar'
 import './Customize.css'
-import styled from 'styled-components';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
-import ButtonToggle from '@mui/material/ToggleButton'
-import TextField from '@mui/material/TextField';
 
 import Tshirt from '../Three/Tshirt'
 import Tshirt2 from '../Three/Tshirt2';
 import Hoodie from '../Three/Hoodie';
-import Picker from '../Three/Picker';
 import { HexColorPicker } from 'react-colorful';
 import { proxy, useSnapshot } from 'valtio';
 import { useSelector } from 'react-redux';
@@ -102,19 +98,6 @@ const Customize = () => {
 
     const [size, setSize] = useState()
 
-    //to set on localStorage
-
-    // const getLocalItems = () => {
-    //     let order = localStorage.getItem('Orders')
-
-
-    //     if (order) {
-    //         return JSON.parse(localStorage.getItem('Orders'));
-    //     }
-    //     else {
-    //         return [];
-    //     }
-    // }
 
     const [background, setBackground] = useState('#fff')
 
@@ -145,13 +128,6 @@ const Customize = () => {
 
     }
 
-    //Adding data to local storage
-
-    // useEffect(() => {
-    //     localStorage.setItem('Orders', JSON.stringify(items))
-    // }, [items]);
-
-
     const renderSwitch = (name) => {
 
         switch (name) {
@@ -176,7 +152,7 @@ const Customize = () => {
             <section className='container' >
                 <div className="d-flex row " >
                     <div className="sections__left col-md-3"  >
-                        <h4 style={{ fontWeight: 'bold', marginTop: '30px' }}>
+                        <h4 style={{ fontWeight: 'bold', marginTop: '160px' }}>
                             Customize it Yourself
                         </h4>
                         <h1 style={{ fontWeight: 'bold' }}>
@@ -210,14 +186,19 @@ const Customize = () => {
                             <div style={{
                                 display: snap.current ? "block" : "block",
                                 position: 'absolute',
-                                top: '230px',
-                                right: '185px'
+                                top: '255px',
+                                right: '210px'
                             }}>
                                 <HexColorPicker className="picker" color={snap.items[snap.current]} onChange={(color) => handleColorPicker(color)} />
-                                <h5 style={{
+                                {/* <h5 style={{
                                     color: '#000',
-                                    textTransform: 'capitalize'
-                                }}>{snap.current} {(state.items[snap.current])} </h5>
+                                    textTransform: 'capitalize',
+                                    marginTop: '10px',
+                                    color: 'black',
+                                    width: 'fit-content',
+                                    padding: '5px',
+                                    borderRadius: '4px'
+                                }}>{snap.current} {(state.items[snap.current])} </h5> */}
                             </div>
                         </>
                         <div className="customize__quantity">

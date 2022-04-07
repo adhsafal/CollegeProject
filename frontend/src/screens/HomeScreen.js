@@ -65,6 +65,7 @@ function HomeScreen({ history }) {
           <Paginate page={page} pages={pages} keyword={keyword} />
           <Contact />
         </div>
+
       )}
     </div>
   );
