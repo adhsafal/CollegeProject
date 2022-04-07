@@ -120,7 +120,7 @@ function ProductEditScreen({ match, history }) {
   };
 
   return (
-    <div>
+    <div className="container">
       <Link to="/admin/productlist">Go Back</Link>
 
       <FormContainer>

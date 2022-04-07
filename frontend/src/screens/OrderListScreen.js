@@ -39,7 +39,7 @@ function OrderListScreen({ history }) {
   /* HANDLER */
 
   return (
-    <div>
+    <div className="container">
       <h1>Orders</h1>
 
       {loading ? (

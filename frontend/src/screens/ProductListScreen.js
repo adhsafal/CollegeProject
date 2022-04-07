@@ -92,7 +92,7 @@ function ProductListScreen({ match, history }) {
   };
 
   return (
-    <div>
+    <div className="container">
       <Row className="align-items-center">
         <Col>
           <h1>Products</h1>

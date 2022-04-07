@@ -12,6 +12,7 @@ import Hoodie from '../Three/Hoodie';
 import { HexColorPicker } from 'react-colorful';
 import { proxy, useSnapshot } from 'valtio';
 import { useSelector } from 'react-redux';
+import { fontSize } from '@mui/system';
 
 
 
@@ -92,10 +93,6 @@ const Customize = () => {
 
     const [text, setText] = useState("Add to Cart");
 
-    const cartText = () => {
-        setText("Added to cart")
-    }
-
     const [size, setSize] = useState()
 
 
@@ -122,6 +119,7 @@ const Customize = () => {
     const c = [...items, ...previousItems]
 
     const addItems = () => {
+        setText("Added to cart")
         console.log(product.name, size, quantity, col)
 
         localStorage.setItem('Orders', JSON.stringify(c))
@@ -158,7 +156,7 @@ const Customize = () => {
                         <h1 style={{ fontWeight: 'bold' }}>
                             {product.name}
                         </h1>
-                        <p style={{ fontWeight: 'bold' }}>Please select the appropriate size and color you want in your T-shirt</p>
+                        <p style={{ fontWeight: 'bold', fontSize: '18px' }}>Please select the appropriate size and color you want in your T-shirt</p>
 
                     </div>
                     <div className="sections__middle col-md-6" >

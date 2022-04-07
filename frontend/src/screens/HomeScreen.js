@@ -38,7 +38,6 @@ function HomeScreen({ history }) {
 
   return (
     <div>
-
       <Intro />
       {!keyword && <ProductCarousel />}
 

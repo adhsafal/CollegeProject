@@ -29,7 +29,7 @@ function App() {
   return (
     <Router>
       <Header />
-      <div className="container-fluid px-0">
+      <div className="">
         <main className="py-3">
           <Route exact path="/" component={HomeScreen} />
 
