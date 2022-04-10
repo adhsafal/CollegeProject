@@ -30,11 +30,9 @@ def getProducts(request):
     
     products = Product.objects.filter(name__icontains=query).order_by('-_id')
 
-    
+
     results = Product.objects.filter(name__icontains=query).order_by('-_id').values_list('name', flat=True)
     results = binary_search(results, query)
-
-
 
     page = request.query_params.get('page')
     paginator = Paginator(products, 8)
