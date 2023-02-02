@@ -7,7 +7,8 @@ SECRET_KEY = 'django-insecure-i-b2o_4@ru#jr_y)vbhdjng$607jjufk4i8b+*wrk0p&!ae%-e
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1','otakuhouse.herokuapp.com']
+# ALLOWED_HOSTS = ['localhost','127.0.0.1','otakuhouse.herokuapp.com']
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh']
 
 
 # Application definition
@@ -103,6 +104,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'backend.wsgi.application'
+app=application
 
 
 # Database
@@ -152,15 +154,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+# STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR ,"media")
 
-STATICFILES_DIRS = [
-    BASE_DIR/'static',
-    BASE_DIR/'frontend/build/static', 
-]
+# STATICFILES_DIRS = [
+#     BASE_DIR/'static',
+#     BASE_DIR/'frontend/build/static', 
+# ]
+
+
+STATICFILES_DIRS = os.path.join(BASE_DIR,'static'),
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+
 
 
 
